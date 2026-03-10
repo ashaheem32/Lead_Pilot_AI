@@ -139,8 +139,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
             </div>
             {!isCollapsed && (
               <div className="flex-1 min-w-0 animate-fade-in">
-                <p className="text-sm font-bold truncate text-foreground leading-tight">Alex Rivera</p>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary uppercase">Pro</span>
+                <p className="text-sm font-bold truncate text-foreground leading-tight">Shaheem</p>
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary uppercase">Premium</span>
               </div>
             )}
             {!isCollapsed && <LogOut size={16} className="text-muted-foreground hover:text-destructive cursor-pointer transition-colors shrink-0" />}

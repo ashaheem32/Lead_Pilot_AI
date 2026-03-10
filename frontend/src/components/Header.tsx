@@ -66,11 +66,11 @@ export const Header: React.FC<HeaderProps> = ({ onMenuClick, isSidebarCollapsed 
 
         <div className="flex items-center gap-3 pl-1 group cursor-pointer">
           <div className="text-right hidden sm:block">
-            <p className="text-sm font-bold text-foreground leading-tight">Alex Rivera</p>
-            <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Pro Plan</p>
+            <p className="text-sm font-bold text-foreground leading-tight">Shaheem</p>
+            <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Premium Plan</p>
           </div>
           <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm">
-            AR
+            S
           </div>
         </div>
       </div>
