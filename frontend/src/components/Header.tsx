@@ -6,19 +6,15 @@ import {
   Menu, 
   ChevronRight,
   User,
-  Settings,
-  LogOut,
-  Moon,
-  Sun
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 const routeMap: Record<string, string> = {
-  '/': 'Campaign Dashboard',
+  '/': 'Dashboard',
   '/finder': 'Lead Finder',
-  '/enrichment': 'Lead Enrichment',
-  '/outreach': 'AI SDR Outreach',
-  '/advisor': 'AI Strategy Advisor'
+  '/enrichment': 'Enrichment',
+  '/outreach': 'AI SDR',
+  '/advisor': 'AI Advisor'
 };
 
 interface HeaderProps {
@@ -28,61 +24,53 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onMenuClick, isSidebarCollapsed }) => {
   const location = useLocation();
-  const currentRouteName = routeMap[location.pathname] || 'Dashboard';
-  const [isDarkMode, setIsDarkMode] = React.useState(false);
+  const currentModule = routeMap[location.pathname] || 'Dashboard';
 
   return (
     <header className={cn(
-      "h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 px-4 md:px-8 flex items-center justify-between transition-all duration-300",
-      isSidebarCollapsed ? "md:ml-20" : "md:ml-64"
+      "h-16 bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-30 px-4 md:px-8 flex items-center justify-between transition-all duration-300",
+      isSidebarCollapsed ? "sm:ml-20" : "sm:ml-64",
+      "ml-0" // Always 0 on mobile because sidebar is hidden
     )}>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4">
         <button 
           onClick={onMenuClick}
-          className="p-2 hover:bg-slate-100 rounded-lg transition-colors text-slate-500 hover:text-slate-900"
+          className="p-2 hover:bg-muted rounded-xl transition-colors text-muted-foreground hover:text-foreground sm:hidden"
         >
           <Menu size={20} />
         </button>
 
-        <div className="flex items-center gap-2 text-sm font-medium text-slate-400">
-          <span className="hover:text-slate-600 transition-colors cursor-pointer">LeadPilot AI</span>
-          <ChevronRight size={14} className="text-slate-300" />
-          <span className="text-[#4f6ef7]">{currentRouteName}</span>
+        <div className="flex items-center gap-2 text-sm font-medium">
+          <span className="text-muted-foreground">LeadPilot AI</span>
+          <ChevronRight size={14} className="text-muted-foreground/50" />
+          <span className="text-primary font-bold">{currentModule}</span>
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <div className="relative hidden md:block group">
-          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#4f6ef7] transition-colors" />
+          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" />
           <input 
             type="text" 
-            placeholder="Search leads..." 
-            className="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm w-64 focus:ring-2 focus:ring-[#4f6ef7]/20 focus:bg-white transition-all outline-none"
+            placeholder="Search pipeline..." 
+            className="pl-10 pr-4 py-2 bg-muted border-none rounded-xl text-sm w-48 lg:w-64 focus:ring-2 focus:ring-primary/20 focus:bg-background transition-all outline-none"
           />
         </div>
 
-        <button 
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="p-2.5 hover:bg-slate-100 rounded-xl transition-all text-slate-500 hover:text-slate-900"
-          title="Toggle Dark Mode"
-        >
-          {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
-
-        <button className="p-2.5 hover:bg-slate-100 rounded-xl transition-all text-slate-500 hover:text-slate-900 relative">
+        <button className="p-2.5 hover:bg-muted rounded-xl transition-all text-muted-foreground hover:text-foreground relative">
           <Bell size={20} />
-          <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full"></span>
+          <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-destructive rounded-full border-2 border-background"></span>
         </button>
 
-        <div className="h-8 w-[1px] bg-slate-200 mx-2"></div>
+        <div className="h-8 w-[1px] bg-border mx-1"></div>
 
-        <div className="flex items-center gap-3 pl-2 group cursor-pointer">
+        <div className="flex items-center gap-3 pl-1 group cursor-pointer">
           <div className="text-right hidden sm:block">
-            <p className="text-sm font-bold text-slate-900 group-hover:text-[#4f6ef7] transition-colors leading-tight">John Doe</p>
-            <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Premium Account</p>
+            <p className="text-sm font-bold text-foreground leading-tight">Alex Rivera</p>
+            <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider">Pro Plan</p>
           </div>
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#4f6ef7] to-indigo-600 border-2 border-white shadow-md flex items-center justify-center text-white font-bold text-sm ring-2 ring-transparent group-hover:ring-[#4f6ef7]/20 transition-all">
-            JD
+          <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm">
+            AR
           </div>
         </div>
       </div>

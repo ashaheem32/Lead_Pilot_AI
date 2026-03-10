@@ -16,27 +16,11 @@ export const AGENT_CONFIGS: AgentConfig[] = [
         "name": "user_query",
         "description": "Respond with relevant advice or insights based on the user's query and the current state of the lead pipeline.",
         "type": "sync",
-        "outputSchema": z.any()
+        "outputSchema": z.object({ response: z.string() })
       },
       {
         "name": "outreach_ready",
         "description": "Suggest personalized outreach strategies and provide templates when leads are ready for outreach.",
-        "type": "async"
-      },
-      {
-        "name": "pipeline_updated",
-        "description": "When the lead pipeline is updated (new leads added, leads enriched, etc.), the agent should analyze the changes and provide updated recommendations or next steps.",
-        "type": "async"
-      },
-      {
-        "name": "user_query",
-        "description": "When a user sends a message in the chat, the agent should respond with relevant advice or insights based on the user's query and the current state of the lead pipeline.",
-        "type": "sync",
-        "outputSchema": z.any()
-      },
-      {
-        "name": "outreach_ready",
-        "description": "When the pipeline indicates that leads are ready for outreach (enriched and prioritized), the agent should suggest personalized outreach strategies and provide templates or sequences for the user to utilize.",
         "type": "async"
       }
     ],

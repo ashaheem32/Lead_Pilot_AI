@@ -24,7 +24,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setToasts(prev => [...prev, { id, message, type }]);
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id));
-    }, 5000);
+    }, 4000);
   }, []);
 
   const removeToast = (id: string) => {
@@ -34,23 +34,23 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 pointer-events-none">
+      <div className="fixed top-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none">
         {toasts.map(toast => (
           <div
             key={toast.id}
             className={cn(
-              "flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border pointer-events-auto min-w-[300px] animate-slide-in-right",
-              toast.type === 'success' && "bg-white border-emerald-100 text-emerald-800",
-              toast.type === 'error' && "bg-white border-red-100 text-red-800",
-              toast.type === 'info' && "bg-white border-blue-100 text-blue-800"
+              "flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border pointer-events-auto min-w-[280px] animate-slide-up bg-card",
+              toast.type === 'success' && "border-emerald-500/20 text-emerald-500",
+              toast.type === 'error' && "border-destructive/20 text-destructive",
+              toast.type === 'info' && "border-primary/20 text-primary"
             )}
           >
-            {toast.type === 'success' && <CheckCircle size={18} className="text-emerald-500 shrink-0" />}
-            {toast.type === 'error' && <AlertCircle size={18} className="text-red-500 shrink-0" />}
-            {toast.type === 'info' && <Info size={18} className="text-blue-500 shrink-0" />}
-            <span className="text-sm font-medium flex-1">{toast.message}</span>
-            <button onClick={() => removeToast(toast.id)} className="text-slate-400 hover:text-slate-600 transition-colors">
-              <X size={16} />
+            {toast.type === 'success' && <CheckCircle size={18} className="shrink-0" />}
+            {toast.type === 'error' && <AlertCircle size={18} className="shrink-0" />}
+            {toast.type === 'info' && <Info size={18} className="shrink-0" />}
+            <span className="text-xs font-bold flex-1">{toast.message}</span>
+            <button onClick={() => removeToast(toast.id)} className="text-muted-foreground hover:text-foreground transition-colors">
+              <X size={14} />
             </button>
           </div>
         ))}
