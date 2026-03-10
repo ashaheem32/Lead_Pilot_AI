@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useTheme } from '../context/ThemeContext';
+import { useSettings } from '../context/SettingsContext';
 
 const navItems = [
   { icon: Search, label: 'Lead Finder', path: '/finder', shortcut: '1' },
@@ -32,7 +33,10 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
   const { theme, toggleTheme } = useTheme();
+  const { settings } = useSettings();
   const navigate = useNavigate();
+
+  const initials = settings.profile.fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -115,15 +119,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
           {!isCollapsed && <span className="animate-fade-in">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>}
         </button>
 
-        <button 
-          className={cn(
-            "flex items-center gap-3 px-4 py-3 w-full text-muted-foreground hover:text-foreground hover:bg-sidebar-accent rounded-xl transition-all text-sm font-medium group",
+        <NavLink 
+          to="/settings"
+          className={({ isActive }) => cn(
+            "flex items-center gap-3 px-4 py-3 w-full rounded-xl transition-all text-sm font-medium group",
+            isActive 
+              ? "bg-primary/10 text-primary" 
+              : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent",
             isCollapsed && "justify-center"
           )}
         >
           <Settings size={20} />
           {!isCollapsed && <span className="animate-fade-in">Settings</span>}
-        </button>
+        </NavLink>
 
         {/* User Avatar */}
         <div className={cn(
@@ -135,11 +143,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
             isCollapsed && "justify-center"
           )}>
             <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm shrink-0">
-              <User size={20} />
+              {initials}
             </div>
             {!isCollapsed && (
               <div className="flex-1 min-w-0 animate-fade-in">
-                <p className="text-sm font-bold truncate text-foreground leading-tight">Shaheem</p>
+                <p className="text-sm font-bold truncate text-foreground leading-tight">{settings.profile.fullName}</p>
                 <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary uppercase">Premium</span>
               </div>
             )}

@@ -13,6 +13,7 @@ interface LeadContextType {
   addLeads: (newLeads: Lead[]) => void;
   showOnboarding: boolean;
   setShowOnboarding: (show: boolean) => void;
+  clearAllData: () => void;
 }
 
 const LeadContext = createContext<LeadContextType | undefined>(undefined);
@@ -94,6 +95,15 @@ export const LeadProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setShowOnboardingState(show);
   };
 
+  const clearAllData = () => {
+    setLeads([]);
+    setCurrentICPState(null);
+    setProductContextState(DEFAULT_PRODUCT_CONTEXT);
+    localStorage.removeItem('leads');
+    localStorage.removeItem('currentICP');
+    localStorage.removeItem('productContext');
+  };
+
   const updateLead = (id: string, updates: Partial<Lead>) => {
     setLeads(prev => {
       const prevArray = Array.isArray(prev) ? prev : [];
@@ -130,7 +140,8 @@ export const LeadProvider: React.FC<{ children: React.ReactNode }> = ({ children
       addLeads, 
       removeLead,
       showOnboarding,
-      setShowOnboarding
+      setShowOnboarding,
+      clearAllData
     }}>
       {children}
     </LeadContext.Provider>
