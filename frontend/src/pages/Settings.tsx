@@ -507,6 +507,18 @@ export const Settings: React.FC = () => {
                 <p className="text-xs text-muted-foreground">Supabase PostgreSQL</p>
               </div>
             </div>
+
+            <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-xl border border-border/50">
+              <div className="p-2 bg-primary/10 rounded-lg text-primary mt-0.5">
+                <Info size={16} />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Data Source</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  AI-generated sample data based on ICP inputs. In production, this would connect to real B2B data providers like Apollo, ZoomInfo, or LinkedIn Sales Navigator via API integrations.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

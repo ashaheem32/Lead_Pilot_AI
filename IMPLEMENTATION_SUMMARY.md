@@ -9,6 +9,7 @@
 - Added **Data & Export** features including "Export All Data" and "Clear All Data" with a confirmation dialog.
 - Developed **SettingsContext** to persist all user preferences in localStorage and apply them across the application.
 - Updated **Header** and **Sidebar** to dynamically reflect user settings (Name, Initials, Premium Plan).
+- **Added Data Source Note**: Included a professional disclaimer in the About section explaining that current data is AI-generated for demo purposes and would connect to providers like Apollo or ZoomInfo in production.
 
 ## UI/UX & Polish
 - Integrated **Compact Mode** CSS to reduce spacing and increase data density when enabled.
